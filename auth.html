@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tasker Auth Redirect</title>
+</head>
+<body>
+    <p>Redirecting back to Tasker...</p>
+    <script>
+        // This script grabs the "?code=..." from the URL and sends it to Tasker
+        const urlParams = window.location.search;
+        if (urlParams) {
+            window.location.href = "tasker://auth" + urlParams;
+        } else {
+            document.body.innerHTML = "No auth code found in the URL.";
+        }
+    </script>
+</body>
+</html>
+
