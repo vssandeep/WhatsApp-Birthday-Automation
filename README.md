@@ -1,2 +1,2 @@
-# com.whatsapp.birthday.automation
+# WhatsApp-Birthday-Automation
 WhatsApp Birthday Automation
