@@ -4,19 +4,23 @@
     <title>Tasker Auth Redirect</title>
 </head>
 <body>
-    <p>Redirecting back to Tasker...</p>
-    <script>
-        // 1. Get the code from the browser URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const authCode = urlParams.get('code');
+    <p>Redirecting to Tasker...</p>
+<a href="" id="taskerLink" style="padding: 20px; background: blue; color: white; display: block; text-align: center;">
+    Click here if not redirected
+</a>
 
-        if (authCode) {
-             // 2. Shout to Tasker: "Run the task named 'GetToken' and give it the code!"
-             window.location.href = "tasker://task?name=GetToken&code=" + authCode;
-        } else {
-             document.body.innerHTML = "Error: No code found in URL.";
-        }
-    </script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    if (code) {
+        const taskerUrl = "tasker://task?name=GetToken&code=" + code;
+        // Try auto-redirect
+        window.location.href = taskerUrl;
+        // Set the button link just in case
+        document.getElementById('taskerLink').href = taskerUrl;
+    }
+</script>
+
 </body>
 </html>
 
