@@ -6,12 +6,15 @@
 <body>
     <p>Redirecting back to Tasker...</p>
     <script>
-        // This script grabs the "?code=..." from the URL and sends it to Tasker
-        const urlParams = window.location.search;
-        if (urlParams) {
-            window.location.href = "tasker://auth" + urlParams;
+        // 1. Get the code from the browser URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const authCode = urlParams.get('code');
+
+        if (authCode) {
+             // 2. Shout to Tasker: "Run the task named 'GetToken' and give it the code!"
+             window.location.href = "tasker://task?name=GetToken&code=" + authCode;
         } else {
-            document.body.innerHTML = "No auth code found in the URL.";
+             document.body.innerHTML = "Error: No code found in URL.";
         }
     </script>
 </body>
