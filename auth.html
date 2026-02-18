@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tasker Auth</title>
-    <script>
-        window.onload = function() {
-            // Extracts the auth code from the URL and sends it to Tasker
-            const urlParams = new URLSearchParams(window.location.search);
-            const code = urlParams.get('code');
-            if (code) {
-                // A tiny delay helps mobile browsers trigger the app link
-        setTimeout(function() {
-            window.location.href = "tasker://auth?code=" + code;
-        }, 500);
-            }
-        }
-    </script>
+    <title>Copy Auth Code</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; background: #4285F4; color: white; }
+        .box { background: white; color: #333; padding: 15px; border-radius: 8px; word-break: break-all; margin: 20px 0; }
+        button { background: #1a73e8; color: white; border: none; padding: 10px 20px; border-radius: 5px; font-size: 16px; }
+    </style>
 </head>
 <body>
-    <p>Authenticating with Tasker... You can close this window if it doesn't close automatically.</p>
+    <h2>Authorization Successful</h2>
+    <p>Tap the code below to copy it, then return to Tasker.</p>
+    <div class="box" id="codeBox">Loading...</div>
+    <button onclick="copyCode()">Copy Code</button>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        if (code) {
+            document.getElementById('codeBox').innerText = code;
+        }
+        function copyCode() {
+            const text = document.getElementById('codeBox').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Code copied to clipboard!");
+            });
+        }
+    </script>
 </body>
 </html>
