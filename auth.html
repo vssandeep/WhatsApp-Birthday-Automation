@@ -8,8 +8,10 @@
             const urlParams = new URLSearchParams(window.location.search);
             const code = urlParams.get('code');
             if (code) {
-                // Tasker looks for this specific format or a redirect
-                window.location.href = "tasker://auth?code=" + code;
+                // A tiny delay helps mobile browsers trigger the app link
+        setTimeout(function() {
+            window.location.href = "tasker://auth?code=" + code;
+        }, 500);
             }
         }
     </script>
